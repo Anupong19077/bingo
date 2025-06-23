@@ -102,19 +102,43 @@
             <button id="login-back-btn" class="w-full mt-4 bg-slate-200 text-slate-700 font-bold py-2 px-6 rounded-lg hover:bg-slate-300">ย้อนกลับ</button>
         </div>
 
+        <!-- Teacher: Dashboard Screen -->
+        <div id="teacher-dashboard-screen" class="hidden bg-white p-8 rounded-xl shadow-lg">
+            <div class="flex justify-between items-start mb-6">
+                <div>
+                     <h2 class="text-2xl font-bold mb-1">แดชบอร์ดของคุณครู</h2>
+                     <p class="text-sm text-slate-500" id="dashboard-teacher-email"></p>
+                </div>
+                <button id="dashboard-logout-btn" class="bg-red-500 text-white font-bold py-1 px-3 text-sm rounded-lg hover:bg-red-600">ออกจากระบบ</button>
+            </div>
+            <button id="dashboard-create-new-btn" class="w-full bg-indigo-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-600 mb-6">สร้างเกมบิงโกใหม่</button>
+
+            <div>
+                <h3 class="text-xl font-bold border-b pb-2 mb-4">ประวัติเกมที่สร้าง</h3>
+                <div id="past-games-list" class="space-y-3 max-h-80 overflow-y-auto">
+                    <!-- Past games will be populated here -->
+                </div>
+                 <p id="no-games-message" class="hidden text-center text-slate-500 py-8">คุณยังไม่เคยสร้างเกม</p>
+            </div>
+        </div>
+
+
         <!-- Teacher: Create Game Screen -->
         <div id="teacher-create-screen" class="hidden bg-white p-8 rounded-xl shadow-lg">
-            <div class="flex justify-between items-start">
-                <div>
-                     <h2 class="text-2xl font-bold mb-1">สร้างเกมบิงโก</h2>
-                     <p class="text-sm text-slate-500 mb-4" id="teacher-email-display"></p>
-                </div>
-                <button id="teacher-logout-btn" class="bg-red-500 text-white font-bold py-1 px-3 text-sm rounded-lg hover:bg-red-600">ออกจากระบบ</button>
+            <h2 class="text-2xl font-bold mb-4">สร้างเกมบิงโกใหม่</h2>
+            <div class="mb-4">
+                <label for="quiz-name-input" class="block text-slate-700 mb-1 font-semibold">ชื่อชุดคำศัพท์/เกม</label>
+                <input type="text" id="quiz-name-input" class="w-full p-3 border rounded-lg" placeholder="เช่น คำศัพท์บทที่ 1">
             </div>
-            <p class="mb-4 text-slate-600">ใส่คำศัพท์หรือคีย์เวิร์ดที่ต้องการใช้ในเกม (อย่างน้อย 24 คำ) โดยแต่ละคำให้ขึ้นบรรทัดใหม่</p>
-            <textarea id="keywords-input" class="w-full h-48 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400" placeholder="คำที่ 1&#10;คำที่ 2&#10;คำที่ 3..."></textarea>
-            <p id="keyword-count" class="text-sm text-slate-500 mt-2">จำนวนคำ: 0</p>
-            <button id="create-game-btn" class="mt-6 w-full bg-indigo-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-indigo-600 disabled:bg-slate-300" disabled>สร้างเกมใหม่</button>
+            <div class="mb-4">
+                <label for="keywords-input" class="block text-slate-700 mb-1 font-semibold">รายการคำศัพท์ (ขั้นต่ำ 24 คำ, 1 คำต่อ 1 บรรทัด)</label>
+                <textarea id="keywords-input" class="w-full h-48 p-3 border rounded-lg focus:ring-2 focus:ring-indigo-400" placeholder="คำที่ 1&#10;คำที่ 2&#10;คำที่ 3..."></textarea>
+                <p id="keyword-count" class="text-sm text-slate-500 mt-2">จำนวนคำ: 0</p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4">
+                <button id="create-game-btn" class="flex-1 bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 disabled:bg-slate-300" disabled>สร้างและเริ่มเกม</button>
+                <button id="create-back-to-dashboard-btn" class="flex-1 bg-slate-200 text-slate-700 font-bold py-2 px-6 rounded-lg hover:bg-slate-300">กลับไปที่แดชบอร์ด</button>
+            </div>
         </div>
         
         <!-- Student: Join Game Screen -->
@@ -172,7 +196,8 @@
                                 <button id="view-winner-card-btn" class="mt-2 text-sm text-indigo-600 hover:underline">ดูการ์ดของผู้ชนะ</button>
                             </div>
                              <button id="draw-keyword-btn" class="w-full bg-green-500 text-white font-bold py-3 px-6 rounded-lg hover:bg-green-600 transition-colors shadow-md mb-4">สุ่มคำศัพท์ใหม่</button>
-                             <button id="reset-game-btn" class="w-full bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition-colors">รีเซ็ตเกม</button>
+                             <button id="reset-game-btn" class="w-full bg-orange-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-orange-600 transition-colors mb-2">รีเซ็ตเกม</button>
+                             <button id="end-game-and-back-to-dashboard-btn" class="w-full bg-red-500 text-white font-bold py-2 px-4 rounded-lg hover:bg-red-600 transition-colors">จบเกมและกลับแดชบอร์ด</button>
                              <div class="mt-4">
                                 <h4 class="font-bold">ผู้เล่นในห้อง:</h4>
                                 <ul id="game-player-list" class="list-disc list-inside text-slate-600 mt-2 max-h-40 overflow-y-auto"></ul>
@@ -191,12 +216,42 @@
             </div>
         </div>
         
+        <!-- General Purpose Modal -->
         <div id="modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
             <div id="modal-content" class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
                 <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
                 <p id="modal-body" class="text-slate-600 mb-6"></p>
                 <div id="modal-winner-card-container" class="hidden mb-4"></div>
                 <button id="modal-close-btn" class="bg-indigo-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-600">ตกลง</button>
+            </div>
+        </div>
+
+        <!-- Confirmation Modal -->
+        <div id="confirm-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
+                <h3 id="confirm-modal-title" class="text-2xl font-bold mb-4"></h3>
+                <p id="confirm-modal-body" class="text-slate-600 mb-6"></p>
+                <div class="flex justify-center gap-4">
+                    <button id="confirm-modal-yes-btn" class="bg-red-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-red-600">ยืนยัน</button>
+                    <button id="confirm-modal-no-btn" class="bg-slate-200 text-slate-700 font-bold py-2 px-6 rounded-lg hover:bg-slate-300">ยกเลิก</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Setup Modal -->
+        <div id="profile-modal" class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+            <div class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full">
+                <h3 class="text-2xl font-bold mb-4 text-center">ข้อมูลส่วนตัว</h3>
+                <p class="text-slate-600 mb-6 text-center">กรุณากรอกข้อมูลของคุณเพื่อทำการสมัครสมาชิกให้เสร็จสมบูรณ์</p>
+                <div class="mb-4">
+                    <label for="profile-firstname" class="block text-slate-700 mb-1">ชื่อจริง</label>
+                    <input type="text" id="profile-firstname" class="w-full p-3 border rounded-lg" placeholder="สมชาย">
+                </div>
+                <div class="mb-6">
+                    <label for="profile-lastname" class="block text-slate-700 mb-1">นามสกุล</label>
+                    <input type="text" id="profile-lastname" class="w-full p-3 border rounded-lg" placeholder="รักเรียน">
+                </div>
+                <button id="profile-save-btn" class="w-full bg-green-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-green-600">บันทึกข้อมูล</button>
             </div>
         </div>
     </div>
@@ -230,6 +285,7 @@
         const screens = {
             role: document.getElementById('role-selection-screen'),
             teacherLogin: document.getElementById('teacher-login-screen'),
+            teacherDashboard: document.getElementById('teacher-dashboard-screen'),
             teacherCreate: document.getElementById('teacher-create-screen'),
             studentJoin: document.getElementById('student-join-screen'),
             keywordSelection: document.getElementById('keyword-selection-screen'),
@@ -242,6 +298,13 @@
         const modalWinnerCardContainer = document.getElementById('modal-winner-card-container');
         const modalCloseBtn = document.getElementById('modal-close-btn');
         
+        const profileModal = document.getElementById('profile-modal');
+        
+        const confirmModal = document.getElementById('confirm-modal');
+        const confirmModalTitle = document.getElementById('confirm-modal-title');
+        const confirmModalBody = document.getElementById('confirm-modal-body');
+        const confirmModalNoBtn = document.getElementById('confirm-modal-no-btn');
+        
         const showScreen = (screenName) => {
             Object.values(screens).forEach(screen => screen.classList.add('hidden'));
             if(screens[screenName]) screens[screenName].classList.remove('hidden');
@@ -250,6 +313,7 @@
         const showModal = (title, body, winnerCardInfo = null) => {
             modalTitle.textContent = title;
             modalBody.textContent = body;
+            modalWinnerCardContainer.classList.add('hidden'); // Reset
             if (winnerCardInfo) {
                 modalWinnerCardContainer.innerHTML = '';
                 const bingoCardDiv = document.createElement('div');
@@ -257,21 +321,41 @@
                 modalWinnerCardContainer.appendChild(bingoCardDiv);
                 renderBingoCard(winnerCardInfo.card, winnerCardInfo.drawnKeywords, winnerCardInfo.winPattern, bingoCardDiv);
                 modalWinnerCardContainer.classList.remove('hidden');
-            } else {
-                modalWinnerCardContainer.classList.add('hidden');
             }
             modal.classList.remove('hidden');
         };
 
+        const showConfirmModal = (title, body, onConfirm) => {
+            confirmModalTitle.textContent = title;
+            confirmModalBody.textContent = body;
+            confirmModal.classList.remove('hidden');
+            
+            const confirmModalYesBtn = document.getElementById('confirm-modal-yes-btn');
+            const newYesBtn = confirmModalYesBtn.cloneNode(true);
+            confirmModalYesBtn.parentNode.replaceChild(newYesBtn, confirmModalYesBtn);
+            
+            newYesBtn.onclick = () => {
+                confirmModal.classList.add('hidden');
+                if (onConfirm) onConfirm();
+            };
+        };
+
         modalCloseBtn.onclick = () => modal.classList.add('hidden');
+        confirmModalNoBtn.onclick = () => confirmModal.classList.add('hidden');
         
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             currentUser = user;
             const authStatusSpan = document.getElementById('auth-status');
             if (user && !user.isAnonymous) {
-                authStatusSpan.textContent = `ล็อคอินในฐานะครู: ${user.email}`;
-                document.getElementById('teacher-email-display').textContent = `บัญชี: ${user.email}`;
-                showScreen('teacherCreate');
+                const userProfileRef = ref(db, `users/${user.uid}`);
+                const profileSnapshot = await get(userProfileRef);
+                if (profileSnapshot.exists()) {
+                    const profile = profileSnapshot.val();
+                    authStatusSpan.textContent = `ครู: ${profile.firstName}`;
+                    showTeacherDashboard();
+                } else {
+                    profileModal.classList.remove('hidden');
+                }
             } else if (user && user.isAnonymous) {
                 authStatusSpan.textContent = "เชื่อมต่อในฐานะผู้เล่นทั่วไป";
             } else {
@@ -279,39 +363,152 @@
                 signInAnonymously(auth).catch(e => console.error("Anonymous sign-in failed", e));
             }
         });
-
-        // --- Event Listeners for screen navigation ---
-        document.getElementById('teacher-role-btn').onclick = () => {
-            if (currentUser && !currentUser.isAnonymous) {
-                showScreen('teacherCreate');
-            } else {
-                showScreen('teacherLogin');
+        
+        const getFirebaseAuthErrorMessage = (errorCode) => {
+            switch (errorCode) {
+                case 'auth/invalid-email': return 'รูปแบบอีเมลไม่ถูกต้อง กรุณาตรวจสอบอีกครั้ง';
+                case 'auth/user-not-found': return 'ไม่พบบัญชีผู้ใช้นี้ในระบบ กรุณาตรวจสอบอีเมลหรือสมัครสมาชิก';
+                case 'auth/wrong-password': return 'รหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง';
+                case 'auth/email-already-in-use': return 'อีเมลนี้มีผู้ใช้งานในระบบแล้ว กรุณาใช้อีเมลอื่น';
+                case 'auth/weak-password': return 'รหัสผ่านไม่ปลอดภัย กรุณาตั้งรหัสผ่านอย่างน้อย 6 ตัวอักษร';
+                default: return 'เกิดข้อผิดพลาดบางอย่าง กรุณาลองใหม่อีกครั้ง';
             }
+        };
+
+        document.getElementById('teacher-role-btn').onclick = () => {
+            if (currentUser && !currentUser.isAnonymous) showTeacherDashboard();
+            else showScreen('teacherLogin');
         };
         document.getElementById('student-btn').onclick = () => showScreen('studentJoin');
         document.getElementById('login-back-btn').onclick = () => showScreen('role');
         document.getElementById('join-back-btn').onclick = () => showScreen('role');
-
+        document.getElementById('dashboard-create-new-btn').onclick = () => showScreen('teacherCreate');
+        document.getElementById('create-back-to-dashboard-btn').onclick = () => showTeacherDashboard();
         
-        // --- Teacher Auth Flow ---
         document.getElementById('teacher-login-btn').onclick = () => {
-            const email = document.getElementById('teacher-email').value;
-            const pass = document.getElementById('teacher-password').value;
-            signInWithEmailAndPassword(auth, email, pass)
-                .catch(err => showModal("เกิดข้อผิดพลาด", err.message));
+            const email = document.getElementById('teacher-email').value.trim();
+            const pass = document.getElementById('teacher-password').value.trim();
+            if (!email || !pass) return showModal("ข้อมูลไม่ครบถ้วน", "กรุณากรอกอีเมลและรหัสผ่านให้ครบถ้วน");
+            signInWithEmailAndPassword(auth, email, pass).catch(err => {
+                showModal("เกิดข้อผิดพลาด", getFirebaseAuthErrorMessage(err.code));
+            });
         };
+        
         document.getElementById('teacher-register-btn').onclick = () => {
-            const email = document.getElementById('teacher-email').value;
-            const pass = document.getElementById('teacher-password').value;
-            createUserWithEmailAndPassword(auth, email, pass)
-                .catch(err => showModal("เกิดข้อผิดพลาด", err.message));
-        };
-        document.getElementById('teacher-logout-btn').onclick = () => {
-            signOut(auth);
-            showScreen('role');
+            const email = document.getElementById('teacher-email').value.trim();
+            const pass = document.getElementById('teacher-password').value.trim();
+            if (!email || !pass) return showModal("ข้อมูลไม่ครบถ้วน", "กรุณากรอกอีเมลและรหัสผ่านให้ครบถ้วน");
+            createUserWithEmailAndPassword(auth, email, pass).catch(err => {
+                showModal("เกิดข้อผิดพลาด", getFirebaseAuthErrorMessage(err.code));
+            });
         };
 
-        // --- Teacher Create Game Flow ---
+        document.getElementById('dashboard-logout-btn').onclick = () => {
+            signOut(auth).then(() => showScreen('role'));
+        };
+
+        document.getElementById('profile-save-btn').onclick = async () => {
+            const firstName = document.getElementById('profile-firstname').value.trim();
+            const lastName = document.getElementById('profile-lastname').value.trim();
+            if (!firstName || !lastName) return showModal("ข้อมูลไม่ครบถ้วน", "กรุณากรอกชื่อและนามสกุล");
+            if (currentUser) {
+                const userProfileRef = ref(db, `users/${currentUser.uid}`);
+                await set(userProfileRef, { firstName, lastName, email: currentUser.email });
+                profileModal.classList.add('hidden');
+                await showTeacherDashboard();
+            }
+        };
+
+        const showTeacherDashboard = async () => {
+            if (!currentUser || currentUser.isAnonymous) return;
+            const userProfileRef = ref(db, `users/${currentUser.uid}`);
+            const profileSnapshot = await get(userProfileRef);
+            if (profileSnapshot.exists()) {
+                 document.getElementById('dashboard-teacher-email').textContent = `บัญชี: ${profileSnapshot.val().firstName} (${profileSnapshot.val().email})`;
+            }
+           
+            showScreen('teacherDashboard');
+
+            const pastGamesList = document.getElementById('past-games-list');
+            const noGamesMessage = document.getElementById('no-games-message');
+            pastGamesList.innerHTML = 'กำลังโหลดประวัติ...';
+            noGamesMessage.classList.add('hidden');
+
+            const teacherGamesRef = ref(db, `teacher_games/${currentUser.uid}`);
+            const snapshot = await get(teacherGamesRef);
+
+            if (snapshot.exists()) {
+                pastGamesList.innerHTML = '';
+                const gamesData = snapshot.val();
+                Object.entries(gamesData).reverse().forEach(([gameCode, gameInfo]) => {
+                    const gameElement = document.createElement('div');
+                    gameElement.className = "p-3 bg-slate-50 border rounded-lg flex justify-between items-center";
+                    const gameDate = new Date(gameInfo.createdAt).toLocaleDateString('th-TH', { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit'});
+                    gameElement.innerHTML = `
+                        <div>
+                            <p class="font-bold">${gameInfo.quizName || 'ไม่มีชื่อ'}</p>
+                            <p class="text-sm text-slate-500">สร้างเมื่อ: ${gameDate}</p>
+                        </div>
+                        <div class="flex gap-2">
+                           <button class="start-past-game-btn bg-blue-500 text-white text-sm font-bold py-1 px-3 rounded hover:bg-blue-600" data-code="${gameCode}">เริ่มเกมนี้</button>
+                           <button class="delete-past-game-btn bg-red-500 text-white text-sm font-bold py-1 px-3 rounded hover:bg-red-600" data-code="${gameCode}">ลบ</button>
+                        </div>
+                    `;
+                    pastGamesList.appendChild(gameElement);
+                });
+
+                document.querySelectorAll('.start-past-game-btn').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        const pastGameCode = e.target.dataset.code;
+                        const pastGameInfoRef = ref(db, `teacher_games/${currentUser.uid}/${pastGameCode}`);
+                        const infoSnapshot = await get(pastGameInfoRef);
+                        if (infoSnapshot.exists()) {
+                            const gameInfo = infoSnapshot.val();
+                            if (gameInfo.keywords && Array.isArray(gameInfo.keywords)) {
+                                await startGameFromPreset(gameInfo.quizName, gameInfo.keywords);
+                            } else {
+                                showModal('ไม่สามารถเริ่มเกมได้', 'ขออภัย, ไม่พบชุดคำศัพท์สำหรับเกมที่บันทึกไว้นี้ อาจเป็นเกมที่สร้างด้วยเวอร์ชันเก่า');
+                            }
+                        }
+                    });
+                });
+
+                 document.querySelectorAll('.delete-past-game-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const gameCodeToDelete = e.target.dataset.code;
+                        showConfirmModal(
+                            'ยืนยันการลบ',
+                            'คุณแน่ใจหรือไม่ว่าต้องการลบประวัติเกมนี้? การกระทำนี้ไม่สามารถย้อนกลับได้',
+                            async () => {
+                                const gameHistoryRef = ref(db, `teacher_games/${currentUser.uid}/${gameCodeToDelete}`);
+                                await remove(gameHistoryRef);
+                                showModal('ลบสำเร็จ', 'ประวัติเกมถูกลบเรียบร้อยแล้ว');
+                                showTeacherDashboard(); // Refresh the dashboard view
+                            }
+                        );
+                    });
+                });
+            } else {
+                pastGamesList.innerHTML = '';
+                noGamesMessage.classList.remove('hidden');
+            }
+        };
+
+        const startGameFromPreset = async (quizName, keywords) => {
+             const newGameCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+             const gameData = {
+                teacherId: currentUser.uid,
+                quizName: quizName,
+                status: 'waiting',
+                keywords: keywords,
+                drawnKeywords: [],
+                players: {},
+                createdAt: new Date().toISOString()
+            };
+            await set(ref(db, `games/${newGameCode}`), gameData);
+            await joinGame(newGameCode, 'ครูผู้สอน', true);
+        };
+
         const keywordsInput = document.getElementById('keywords-input');
         const createGameBtn = document.getElementById('create-game-btn');
         keywordsInput.addEventListener('input', () => {
@@ -321,27 +518,66 @@
         });
 
         createGameBtn.onclick = async () => {
-            if (!currentUser || currentUser.isAnonymous) {
-                 showModal("ข้อผิดพลาด", "กรุณาเข้าสู่ระบบในฐานะครูเพื่อสร้างเกม");
-                 return;
-            }
-            const gameCode = Math.random().toString(36).substring(2, 8).toUpperCase();
-            const keywords = keywordsInput.value.trim().split('\n').filter(k => k.trim() !== '');
+            const quizName = document.getElementById('quiz-name-input').value.trim();
+            if (!quizName) return showModal("ข้อมูลไม่ครบถ้วน", "กรุณาตั้งชื่อชุดคำศัพท์/เกม");
             
+            const keywords = keywordsInput.value.trim().split('\n').filter(k => k.trim() !== '');
+            const newGameCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+            const createdAt = new Date().toISOString();
+
             const gameData = {
-                teacherId: currentUser.uid,
-                status: 'waiting',
-                keywords: keywords,
-                drawnKeywords: [],
-                players: {},
-                createdAt: new Date().toISOString()
+                teacherId: currentUser.uid, quizName, status: 'waiting', keywords,
+                drawnKeywords: [], players: {}, createdAt
             };
 
-            await set(ref(db, `games/${gameCode}`), gameData);
-            await joinGame(gameCode, 'ครูผู้สอน', true);
+            const updates = {};
+            updates[`/games/${newGameCode}`] = gameData;
+            updates[`/teacher_games/${currentUser.uid}/${newGameCode}`] = { quizName, createdAt, keywords };
+            await update(ref(db), updates);
+            await joinGame(newGameCode, 'ครูผู้สอน', true);
+        };
+        
+        document.getElementById('end-game-and-back-to-dashboard-btn').onclick = () => {
+            showConfirmModal(
+                'ยืนยันการจบเกม',
+                'คุณต้องการจบเกมนี้และกลับไปที่หน้าแดชบอร์ดใช่หรือไม่? การกระทำนี้จะลบห้องเกมปัจจุบัน',
+                async () => {
+                    if(gameListener) off(currentGameRef, 'value', gameListener);
+                    if(currentGameRef) await remove(currentGameRef);
+                    
+                    currentGameCode = null;
+                    currentGameRef = null;
+                    currentPlayerRef = null;
+                    gameListener = null;
+
+                    showTeacherDashboard();
+                }
+            );
+        };
+        
+        document.getElementById('reset-game-btn').onclick = () => {
+            showConfirmModal(
+                'ยืนยันการรีเซ็ตเกม',
+                'คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตเกม? ผู้เล่นทุกคนจะต้องสร้างการ์ดใหม่',
+                async () => {
+                    const playersSnapshot = await get(ref(db, `games/${currentGameCode}/players`));
+                    if (!playersSnapshot.exists()) return;
+                    const players = playersSnapshot.val();
+                    const updates = {};
+                    updates[`/games/${currentGameCode}/status`] = 'waiting';
+                    updates[`/games/${currentGameCode}/drawnKeywords`] = [];
+                    updates[`/games/${currentGameCode}/winner`] = null;
+
+                    Object.keys(players).forEach(uid => {
+                        updates[`/games/${currentGameCode}/players/${uid}/card`] = [];
+                        updates[`/games/${currentGameCode}/players/${uid}/isReady`] = players[uid].isTeacher;
+                    });
+                    await update(ref(db), updates);
+                    showModal("รีเซ็ตเกม", "เกมถูกรีเซ็ตแล้ว ผู้เล่นจะต้องเลือกคีย์เวิร์ดอีกครั้ง");
+                }
+            );
         };
 
-        // --- Student Flow ---
         document.getElementById('join-game-btn').onclick = async () => {
             const gameCode = document.getElementById('game-code-input').value.trim().toUpperCase();
             const studentName = document.getElementById('student-name-input').value.trim();
@@ -363,14 +599,10 @@
             currentGameCode = gameCode;
             currentGameRef = ref(db, `games/${gameCode}`);
             
-            const playerInfo = {
-                name: playerName,
-                isTeacher: isTeacher,
-                isReady: isTeacher,
-                card: [],
-            };
+            const playerInfo = { name: playerName, isTeacher, isReady: isTeacher, card: [] };
             
-            currentPlayerRef = ref(db, `games/${gameCode}/players/${currentUser.uid}`);
+            const uid = auth.currentUser.uid;
+            currentPlayerRef = ref(db, `games/${gameCode}/players/${uid}`);
             await set(currentPlayerRef, playerInfo);
 
             if (isTeacher) {
@@ -384,6 +616,7 @@
                 if (snapshot.exists()) {
                     updateUIWithGameData(snapshot.val(), isTeacher);
                 } else {
+                    if (screens.game.classList.contains('hidden')) return;
                     cleanupAndExit("ห้องเกมถูกปิดแล้ว", "ครูได้ทำการปิดห้องเกมนี้แล้ว");
                 }
             });
@@ -396,7 +629,7 @@
             const createCardBtn = document.getElementById('create-bingo-card-btn');
             
             onValue(ref(db, `games/${currentGameCode}/keywords`), (snapshot) => {
-                const keywords = snapshot.val();
+                const keywords = snapshot.val() || [];
                 selectionGrid.innerHTML = '';
                 let selectedKeywords = new Set();
 
@@ -423,12 +656,13 @@
 
             createCardBtn.onclick = async () => {
                 let cardKeywords = Array.from(selectionGrid.querySelectorAll('.keyword-chip.selected')).map(c => c.textContent);
-                cardKeywords = cardKeywords.sort(() => Math.random() - 0.5); // Shuffle
-                cardKeywords.splice(12, 0, FREE_SPACE_KEYWORD); // Insert FREE space at the center
+                cardKeywords = cardKeywords.sort(() => Math.random() - 0.5); 
+                cardKeywords.splice(12, 0, FREE_SPACE_KEYWORD); 
                 
+                const uid = auth.currentUser.uid;
                 const updates = {};
-                updates[`/games/${currentGameCode}/players/${currentUser.uid}/card`] = cardKeywords;
-                updates[`/games/${currentGameCode}/players/${currentUser.uid}/isReady`] = true;
+                updates[`/games/${currentGameCode}/players/${uid}/card`] = cardKeywords;
+                updates[`/games/${currentGameCode}/players/${uid}/isReady`] = true;
                 await update(ref(db), updates);
             };
         };
@@ -444,8 +678,12 @@
         };
         
         const updateUIWithGameData = (gameData, isTeacher) => {
-            const me = gameData.players[currentUser.uid];
-            if (!me) return cleanupAndExit("คุณออกจากเกมแล้ว", "คุณไม่ได้อยู่ในห้องเกมนี้อีกต่อไป");
+            const uid = auth.currentUser.uid;
+            const me = gameData.players[uid];
+            if (!me) {
+                 if(isTeacher) return;
+                 return cleanupAndExit("คุณออกจากเกมแล้ว", "คุณไม่ได้อยู่ในห้องเกมนี้อีกต่อไป");
+            }
             
             if (!isTeacher && !me.isReady) {
                  if (screens.keywordSelection.classList.contains('hidden')) setupKeywordSelectionScreen();
@@ -478,7 +716,8 @@
             const isFinished = gameData.status === 'finished';
 
             if (isTeacher) {
-                const remaining = new Set([...gameData.keywords].filter(x => !new Set(drawnKeywords).has(x)));
+                const allKeywords = gameData.keywords || [];
+                const remaining = new Set(allKeywords.filter(x => !new Set(drawnKeywords).has(x)));
                 document.getElementById('draw-keyword-btn').disabled = remaining.size === 0 || isFinished;
                 
                 const winnerAnnounce = document.getElementById('winner-announcement');
@@ -496,7 +735,7 @@
         const renderBingoCard = (cardData, drawnKeywords, winPattern = [], container = document.getElementById('bingo-card-container')) => {
             container.innerHTML = '';
             const drawnSet = new Set(drawnKeywords);
-            const winSet = new Set(winPattern);
+            const winSet = new Set(winPattern || []);
 
             cardData.forEach((keyword, index) => {
                 const cell = document.createElement('div');
@@ -509,7 +748,7 @@
                     cell.classList.add('marked');
                 }
                 if (isFreeSpace) {
-                    cell.classList.add('selected'); // Auto-select free space
+                    cell.classList.add('selected'); 
                 }
                 if(winSet.has(index)) {
                     cell.classList.add('winning-line');
@@ -529,7 +768,7 @@
              const gameData = snapshot.val();
              if (gameData.status === 'finished') return;
 
-             const remaining = [...gameData.keywords].filter(x => !(gameData.drawnKeywords || []).includes(x));
+             const remaining = [...(gameData.keywords || [])].filter(x => !(gameData.drawnKeywords || []).includes(x));
              if(remaining.length > 0) {
                  const newKeyword = remaining[Math.floor(Math.random() * remaining.length)];
                  const updates = {
@@ -539,31 +778,13 @@
                  await update(ref(db), updates);
              }
         };
-        
-        document.getElementById('reset-game-btn').onclick = async () => {
-            if (!window.confirm('คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตเกม? ผู้เล่นทุกคนจะต้องสร้างการ์ดใหม่')) return;
-            
-            const playersSnapshot = await get(ref(db, `games/${currentGameCode}/players`));
-            const players = playersSnapshot.val();
-            const updates = {};
-            updates[`/games/${currentGameCode}/status`] = 'waiting';
-            updates[`/games/${currentGameCode}/drawnKeywords`] = [];
-            updates[`/games/${currentGameCode}/winner`] = null;
-
-            Object.keys(players).forEach(uid => {
-                updates[`/games/${currentGameCode}/players/${uid}/card`] = [];
-                updates[`/games/${currentGameCode}/players/${uid}/isReady`] = players[uid].isTeacher;
-            });
-            await update(ref(db), updates);
-            showModal("รีเซ็ตเกม", "เกมถูกรีเซ็ตแล้ว ผู้เล่นจะต้องเลือกคีย์เวิร์ดอีกครั้ง");
-        };
 
         document.getElementById('view-winner-card-btn').onclick = async () => {
             const snapshot = await get(currentGameRef);
             const gameData = snapshot.val();
             if(!gameData.winner) return;
-
-            const winnerPlayer = gameData.players[gameData.winner.uid];
+            const uid = gameData.winner.uid;
+            const winnerPlayer = gameData.players[uid];
             showModal(
                 `การ์ดของ ${gameData.winner.name}`, 
                 `บิงโกด้วยแถวที่ถูกเน้นสี`,
@@ -586,10 +807,11 @@
             const winPattern = checkWin(markedIndices);
 
             if (winPattern) {
-                const me = gameData.players[currentUser.uid];
+                const uid = auth.currentUser.uid;
+                const me = gameData.players[uid];
                 const updates = {};
                 updates[`/games/${currentGameCode}/status`] = 'finished';
-                updates[`/games/${currentGameCode}/winner`] = { name: me.name, uid: currentUser.uid, pattern: winPattern };
+                updates[`/games/${currentGameCode}/winner`] = { name: me.name, uid: uid, pattern: winPattern };
                 await update(ref(db), updates);
             } else {
                 showModal("ยังไม่บิงโก!", "ตรวจสอบการ์ดของคุณอีกครั้ง ยังไม่มีแถวที่ครบ 5 คำ");
@@ -617,7 +839,7 @@
              currentPlayerRef = null;
              gameListener = null;
 
-             showModal(title, message);
+             if(title && message) showModal(title, message);
              showScreen('role');
         };
 
