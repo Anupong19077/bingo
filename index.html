@@ -837,7 +837,8 @@
             if (screens.game.classList.contains('hidden')) setupGameScreen(isTeacher, me.name);
             
             if (!isTeacher) {
-                 renderBingoCard(me.card || [], gameData.drawnKeywords || [], gameData.winner?.pattern);
+                const isWinner = gameData.winner && gameData.winner.uid === uid;
+                renderBingoCard(me.card || [], gameData.drawnKeywords || [], isWinner ? gameData.winner.pattern : []);
             }
             
             const drawnKeywords = gameData.drawnKeywords || [];
@@ -865,6 +866,20 @@
                     winnerAnnounce.classList.remove('hidden');
                 } else {
                     winnerAnnounce.classList.add('hidden');
+                }
+                
+                const gamePlayerList = document.getElementById('game-player-list');
+                gamePlayerList.innerHTML = '';
+                const playersArray = Object.values(gameData.players || {});
+                if (playersArray.length > 1) {
+                    playersArray.forEach(player => {
+                        if (player.isTeacher) return;
+                        const li = document.createElement('li');
+                        li.textContent = player.name;
+                        gamePlayerList.appendChild(li);
+                    });
+                } else {
+                    gamePlayerList.innerHTML = '<li class="text-slate-500 list-none">ยังไม่มีผู้เล่นเข้าร่วม</li>';
                 }
             } else {
                  document.getElementById('bingo-btn').disabled = isFinished;
@@ -1085,4 +1100,4 @@
 
     </script>
 </body>
-</html>
+</ht
