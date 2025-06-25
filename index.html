@@ -791,12 +791,27 @@
             if (isTeacher) {
                 document.getElementById('teacher-qr-panel').classList.remove('hidden');
                 document.getElementById('teacher-main-controls').classList.remove('hidden');
-                 document.getElementById('game-code-display-teacher').textContent = currentGameCode;
+                document.getElementById('game-code-display-teacher').textContent = currentGameCode;
+                generateQRCode(currentGameCode);
             } else {
                 document.getElementById('student-game-view').classList.remove('hidden');
                 document.getElementById('game-code-display').textContent = currentGameCode;
                 document.getElementById('player-name-display').textContent = playerName;
             }
+        };
+        
+        const generateQRCode = (gameCode) => {
+            const qrCodeContainer = document.getElementById('qrcode');
+            qrCodeContainer.innerHTML = '';
+            const joinURL = `https://anupong19077.github.io/bingo/?game_code=${gameCode}`;
+            new QRCode(qrCodeContainer, {
+                text: joinURL,
+                width: 200,
+                height: 200,
+                colorDark : "#000000",
+                colorLight : "#ffffff",
+                correctLevel : QRCode.CorrectLevel.H
+            });
         };
         
         const updateUIWithGameData = (gameData, isTeacher) => {
