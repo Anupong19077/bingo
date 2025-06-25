@@ -15,7 +15,6 @@
             display: grid;
             grid-template-columns: repeat(5, 1fr);
             gap: 8px;
-            aspect-ratio: 1 / 1;
         }
         .bingo-cell {
             display: flex;
@@ -281,7 +280,7 @@
             <div id="modal-content" class="bg-white rounded-lg shadow-xl p-8 max-w-sm w-full text-center">
                 <h3 id="modal-title" class="text-2xl font-bold mb-4"></h3>
                 <p id="modal-body" class="text-slate-600 mb-6"></p>
-                <div id="modal-winner-card-container" class="hidden mb-4"></div>
+                <div id="modal-winner-card-container" class="hidden my-4 flex justify-center"></div>
                 <button id="modal-close-btn" class="bg-indigo-500 text-white font-bold py-2 px-6 rounded-lg hover:bg-indigo-600">ตกลง</button>
             </div>
         </div>
@@ -379,7 +378,7 @@
             if (winnerCardInfo) {
                 modalWinnerCardContainer.innerHTML = '';
                 const bingoCardDiv = document.createElement('div');
-                bingoCardDiv.className = 'bingo-card mx-auto max-w-[250px]';
+                bingoCardDiv.className = 'bingo-card mx-auto w-full max-w-[250px]';
                 modalWinnerCardContainer.appendChild(bingoCardDiv);
                 renderBingoCard(winnerCardInfo.card, winnerCardInfo.drawnKeywords, winnerCardInfo.winPattern, bingoCardDiv);
                 modalWinnerCardContainer.classList.remove('hidden');
@@ -1100,4 +1099,4 @@
 
     </script>
 </body>
-</ht
+</html>
